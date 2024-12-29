@@ -7,6 +7,7 @@ const taskSchema = new Schema({
     },
     description: {
         type: String,
+        default: ''	,
         required: false
     },
     status: {

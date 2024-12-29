@@ -16,11 +16,6 @@ export const createTask = async (req, res) => {
 }
 
 export const getTasks = async (req, res) => { 
-    // const tasks = await Task.find({
-    //     user: req.user.id
-    // }).populate('user')
-
-    // res.json(tasks)
     try {
         const { status } = req.query
         const query = { user: req.user.id }
@@ -38,27 +33,16 @@ export const getTasks = async (req, res) => {
 
 export const getTask = async (req, res) => { 
     const task = await Task.findById(req.params.id).populate('user')
-    if(!task) {
-        return res.status(404).json({message: "Task not found"})
-    }
 
     res.json(task)
 }
 
 export const updateTask = async (req, res) => { 
     const task = await Task.findByIdAndUpdate(req.params.id, req.body, {new: true})
-    if(!task) {
-        return res.status(404).json({message: "Task not found"})
-    }
-
     res.json(task)
 }
 
 export const deleteTask = async (req, res) => { 
     const task = await Task.findByIdAndDelete(req.params.id).populate('user')
-    if(!task) {
-        return res.status(404).json({message: "Task not found"})
-    }
-
     return res.status(201).json({message: "Task deleted"})
 }
