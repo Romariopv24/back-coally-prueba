@@ -16,10 +16,6 @@ export const registerUser = async(req, res) => {
 
         const saveUser = await newUser.save()
 
-        // const token = await createAccessToken({id:saveUser._id})
-
-        // res.cookie("token", token, {httpOnly: true, secure: false})
-        // res.setHeader('Authorization', `Bearer ${token}`)
         res.json({
             id: saveUser._id,
             username: saveUser.username,
@@ -37,22 +33,11 @@ export const loginUser = async (req, res) => {
     const { email, password } = req.body
     try {
 
-        const foundUser = await User.findOne({ email })
+        const foundUser = await User.findOne({ email: req.body.email })
 
-        if(!foundUser) {
-            return res.status(400).json({message: "User not found"})
-        }
-
-        const isMatch = await bcrypt.compare(password, foundUser.password)
-
-        if(!isMatch) {
-            return res.status(400).json({message: "Password is incorrect"})
-        }
-
-        const token = await createAccessToken({id:foundUser._id})
+        const token = await createAccessToken({ id: foundUser._id })
 
         res.cookie("token", token, {httpOnly: true, secure: false})
-        // res.setHeader('Authorization', `Bearer ${token}`)
 
         res.json({
             id: foundUser._id,
