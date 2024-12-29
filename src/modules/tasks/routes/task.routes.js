@@ -1,7 +1,7 @@
 import express from "express"
 import { authRequired } from "../../../middlewares/jwt.js"
 import { getTask, getTasks, createTask, updateTask, deleteTask } from "../controllers/task.controller.js"
-import { taskValidationPost, taskValidationGetTask, taskValidationUpdateTask, taskValidationDeleteTask, taskValidationGetTasks } from "../validators/tasks.validators.js"
+import { taskValidationPost, taskValidationGetTask, taskValidationUpdateTask, taskValidationDeleteTask } from "../validators/tasks.validators.js"
 import { validateResult } from "../../../middlewares/validations.middleware.js"
 
 
