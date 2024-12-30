@@ -44,7 +44,13 @@ export const loginUser = async (req, res) => {
 
         const foundUser = await User.findOne({ email: req.body.email })
 
-        const token = await createAccessToken({ id: foundUser._id })
+        const token = await createAccessToken({ 
+            id: foundUser._id,
+            username: foundUser.username,
+            email: foundUser.email,
+            createdAt: foundUser.createdAt,
+            updatedAt: foundUser.updatedAt,
+        })
 
         res.cookie("token", token, {httpOnly: true, secure: false})
 
@@ -54,7 +60,6 @@ export const loginUser = async (req, res) => {
             email: foundUser.email,
             createdAt: foundUser.createdAt,
             updatedAt: foundUser.updatedAt,
-            token: token
         })
 
     } catch (error) {
