@@ -5,7 +5,6 @@ import { taskValidationPost, taskValidationGetTask, taskValidationUpdateTask, ta
 import { validateResult } from "../../../middlewares/validations.middleware.js"
 
 
-// taskValidation
 const router = express.Router()
 
 router.get('/tasks', authRequired, getTasks)

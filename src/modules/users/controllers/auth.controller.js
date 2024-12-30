@@ -2,8 +2,13 @@ import User from '../models/auth.model.js'
 import { createAccessToken } from '../../../middlewares/jwt.js'
 import bcrypt from 'bcryptjs'
 
+
+
 export const registerUser = async(req, res) => {
-    const { username, email, password } = req.body
+   //   #swagger.tags = ['Auth']
+   //  #swagger.summary = 'Registrar usuario'
+    //  #swagger.description = 'Endpoint para registrar un nuevo usuario'
+    const { username, email, password, confirmPassword } = req.body
     try {
 
         const passwordHash = await bcrypt.hash(password, 10)
@@ -30,6 +35,10 @@ export const registerUser = async(req, res) => {
 }
 
 export const loginUser = async (req, res) => {
+   //   #swagger.tags = ['Auth']
+   //  #swagger.summary = 'Iniciar sesion'
+   //  #swagger.description = 'Endpoint para iniciar sesion de un usuario'
+ 
     const { email, password } = req.body
     try {
 
@@ -54,6 +63,10 @@ export const loginUser = async (req, res) => {
 }
 
 export const logoutUser = async (req, res) => { 
+   //   #swagger.tags = ['Auth']
+   //  #swagger.summary = 'Cerrar sesion'
+    //  #swagger.description = 'Endpoint para cerrar sesion de un usuario'
+
     res.cookie("token", "", {
         expires: new Date(0)
     })
@@ -61,6 +74,10 @@ export const logoutUser = async (req, res) => {
 }
 
 export const profileUser = async (req, res) => {
+      //   #swagger.tags = ['Auth']
+   //  #swagger.summary = 'Perfil de usuario'
+    //  #swagger.description = 'Endpoint para obtener el perfil de un usuario'
+
     const userFound = await User.findById(req.user.id)
 
     if(!userFound) {

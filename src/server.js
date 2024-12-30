@@ -4,6 +4,9 @@ import connectDB from './DB/connection.js'
 import routes from './routes/index.js'
 import cors from 'cors'
 import cookieParser from "cookie-parser"
+import swaggerUI from 'swagger-ui-express'
+import swagger_output from './swagger_output.json' assert { type: "json" }
+
 
 connectDB()
 
@@ -12,6 +15,9 @@ const app = express()
 
 async function expressServer() {
   
+  app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swagger_output, {
+    customSiteTitle: "Coally"
+  }))
   app.use(cookieParser())
   app.use(express.json())
   app.use(morgan('dev'))
