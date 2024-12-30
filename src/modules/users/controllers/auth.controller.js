@@ -60,6 +60,7 @@ export const loginUser = async (req, res) => {
             email: foundUser.email,
             createdAt: foundUser.createdAt,
             updatedAt: foundUser.updatedAt,
+            token: token
         })
 
     } catch (error) {
