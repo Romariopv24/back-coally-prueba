@@ -1,11 +1,11 @@
-import swaggerAutoGen from 'swagger-autogen'
+import swaggerAutoGen from 'swagger-autogen';
 
-const outputFile = './swagger_output.json'
+const outputFile = './swagger_output.json';
 const endpointsFiles = [
     './src/routes/index.js',
     './src/modules/users/routes/auth.routes.js',
     './src/modules/tasks/routes/task.routes.js'
-]
+];
 
 const doc = {
     info: {
@@ -20,7 +20,7 @@ const doc = {
     produces: ['application/json'],
     tags: [
         { name: "Auth", description: "Endpoints creados para la Autenticacion del usuario" },
-        { name: "Tasks", description: "Endpoints creados para las Tasks del usuario " }	
+        { name: "Tasks", description: "Endpoints creados para las Tasks del usuario " }
     ],
     securityDefinitions: {
         JWT: {
@@ -29,8 +29,9 @@ const doc = {
             name: 'Authorization',
             description: ""
         }
-    },
-    apis: ['./src/routes/*.js', './src/modules/**/routes/*.js'] 
-}
+    }
+};
 
-swaggerAutoGen(outputFile, endpointsFiles, doc)
+swaggerAutoGen(outputFile, endpointsFiles, doc).then(() => {
+    import('./server.js'); 
+});
