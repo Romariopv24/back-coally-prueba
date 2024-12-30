@@ -5,7 +5,7 @@ import routes from './routes/index.js'
 import cors from 'cors'
 import cookieParser from "cookie-parser"
 import swaggerUI from 'swagger-ui-express'
-import swagger_output from './swagger_output.json' assert { type: "json" }
+import fs from 'fs'
 
 
 connectDB()
@@ -14,8 +14,8 @@ const app = express()
 
 
 async function expressServer() {
-  
-  app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swagger_output, {
+  const swaggerDocument = JSON.parse(fs.readFileSync('./swagger_output.json', 'utf8'));
+  app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, {
     customSiteTitle: "Coally"
   }))
   app.use(cookieParser())
