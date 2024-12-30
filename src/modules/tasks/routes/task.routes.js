@@ -4,14 +4,12 @@ import { getTask, getTasks, createTask, updateTask, deleteTask } from "../contro
 import { taskValidationPost, taskValidationGetTask, taskValidationUpdateTask, taskValidationDeleteTask } from "../validators/tasks.validators.js"
 import { validateResult } from "../../../middlewares/validations.middleware.js"
 
-
 const router = express.Router()
 
 router.get('/tasks', authRequired, getTasks)
-router.get('/tasks/:id',taskValidationGetTask, validateResult,  authRequired, getTask)
-router.post('/tasks',taskValidationPost, validateResult, authRequired, createTask)
-router.delete('/tasks/:id', taskValidationDeleteTask, validateResult, authRequired, deleteTask)
-router.put('/tasks/:id',taskValidationUpdateTask, validateResult ,authRequired, updateTask)
-
+router.get('/tasks/:id', authRequired, taskValidationGetTask, validateResult, getTask)
+router.post('/tasks', authRequired, taskValidationPost, validateResult, createTask)
+router.delete('/tasks/:id', authRequired, taskValidationDeleteTask, validateResult, deleteTask)
+router.put('/tasks/:id', authRequired, taskValidationUpdateTask, validateResult, updateTask)
 
 export default router

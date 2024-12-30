@@ -90,7 +90,7 @@ export const profileUser = async (req, res) => {
     if(!userFound) {
         return res.status(404).json({message: "User not found"})
     }
-    const token = req.cookies.token
+    const token = req.headers.authorization.split(" ")[1];
     return res.status(200).json({
         id: userFound._id,
         username: userFound.username,
