@@ -15,7 +15,7 @@ const doc = {
     },
     host: "https://back-coally-prueba.onrender.com",
     basePath: "/api/v1",
-    schemes: ['http', 'https'],
+    schemes: ['https'],
     consumes: ['application/json'],
     produces: ['application/json'],
     tags: [
