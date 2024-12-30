@@ -29,9 +29,9 @@ async function expressServer() {
   const originUrls = ['*']
 
   const corsOptions = {
-        origin: originUrls,
+        // origin: originUrls,
+        origin: ['http://localhost:5173', '*'],
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-        credentials: true 
     }
 
     app.use((req, res, next) => {
