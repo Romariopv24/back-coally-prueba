@@ -6,6 +6,7 @@ import cors from 'cors'
 import cookieParser from "cookie-parser"
 import swaggerUI from 'swagger-ui-express'
 import fs from 'fs'
+import path from 'path'
 
 
 connectDB()
@@ -14,10 +15,18 @@ const app = express()
 
 
 async function expressServer() {
-  const swaggerDocument = JSON.parse(fs.readFileSync('./swagger_output.json', 'utf8'));
+  
+  const swaggerPath = path.resolve(__dirname, './swagger_output.json');
+  if (!fs.existsSync(swaggerPath)) {
+    console.error('Swagger file not found:', swaggerPath);
+    process.exit(1);
+  }
+
+  const swaggerDocument = JSON.parse(fs.readFileSync(swaggerPath, 'utf8'));
   app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, {
-    customSiteTitle: "Coally"
-  }))
+    customSiteTitle: 'API Coally'
+  }));
+
   app.use(cookieParser())
   app.use(express.json())
   app.use(morgan('dev'))
