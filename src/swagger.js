@@ -13,7 +13,7 @@ const doc = {
         title: "Coally Crud Swagger",
         description: "API de Express para el crud de Coally",
     },
-    host: "localhost:4321",
+    host: "https://back-coally-prueba.onrender.com",
     basePath: "/api/v1",
     schemes: ['http', 'https'],
     consumes: ['application/json'],
