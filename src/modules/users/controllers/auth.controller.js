@@ -53,7 +53,8 @@ export const loginUser = async (req, res) => {
             username: foundUser.username,
             email: foundUser.email,
             createdAt: foundUser.createdAt,
-            updatedAt: foundUser.updatedAt
+            updatedAt: foundUser.updatedAt,
+            token: token
         })
 
     } catch (error) {
@@ -83,13 +84,14 @@ export const profileUser = async (req, res) => {
     if(!userFound) {
         return res.status(404).json({message: "User not found"})
     }
-
+    const token = req.cookies.token
     return res.status(200).json({
         id: userFound._id,
         username: userFound.username,
         email: userFound.email,
         createdAt: userFound.createdAt,
-        updatedAt: userFound.updatedAt
+        updatedAt: userFound.updatedAt,
+        token: token
     })
 
 }
