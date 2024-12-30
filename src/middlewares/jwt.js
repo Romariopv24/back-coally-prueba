@@ -13,10 +13,13 @@ export const createAccessToken = async (payload) => {
 }
 
 export const authRequired = async (req, res, next) => {
-    const token = req.cookies.token
-    if (!token) {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(401).json({ message: "No token, authorization denied" });
     }
+
+    const token = authHeader.split(' ')[1];
 
     try {
         const decoded = jwt.verify(token, process.env.TOKEN_SECRET_KEY);
